@@ -1,6 +1,17 @@
 """An exercise in remainders and boolean logic."""
 
-__author__ = "ENTER YOUR 9-DIGIT PID HERE"
+__author__ = 730151647
 
+x: int = int(input("Pick a number, any number..."))
 
-# Begin your solution here...
+if ((x % 2 == 0) or (x % 7 == 0)):
+    if (x % 2 == 0):
+        if (x % 7 == 0):
+            if ((x % 2 == 0) and (x % 7 == 0)):
+                print("TAR HEELS")
+        else:
+            print("TAR")
+    else:
+        print("HEELS")
+else:
+    print("CAROLINA")
