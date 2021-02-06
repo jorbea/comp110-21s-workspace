@@ -31,5 +31,5 @@ today: datetime = datetime.today()
 vaccination_time: timedelta = timedelta(days)
 future: datetime = today + vaccination_time
 
-print(("We will reach " + str(targt_percnt_int_vaccine) + "% vaccination in " + str(days) + " days,"
-" which falls on " + str(future.strftime("%B %d, %Y") + ".")))
+print("We will reach " + str(targt_percnt_int_vaccine) + "% vaccination in " + str(days) + " days.")
+print(("This target will fall on " + str(future.strftime("%B %d, %Y")) + "."))
