@@ -16,7 +16,6 @@ from datetime import datetime
 # Official Documentation: https://docs.python.org/3/library/datetime.html#datetime.timedelta
 from datetime import timedelta
 
-#Begin program here...
 population: int = int(input("Population:"))
 doses_administered: int = int(input("Doses administered:"))
 doses_per_day: int = int(input("Doses per day:"))
