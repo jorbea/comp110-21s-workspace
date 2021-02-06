@@ -1,6 +1,6 @@
 """An exercise in remainders and boolean logic."""
 
-__author__ = 730151647
+__author__ = "730151647"
 
 x: int = int(input("Pick a number, any number..."))
 

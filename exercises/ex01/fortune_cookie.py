@@ -1,6 +1,6 @@
 """Program that outputs one of at least four random, good fortunes."""
 
-__author__ = 730151647
+__author__ = "730151647"
 
 # The randint function is imported from the random library so that
 # you are able to generate integers at random.

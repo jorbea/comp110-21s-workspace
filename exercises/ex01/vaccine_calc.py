@@ -1,6 +1,6 @@
 """A vaccination calculator."""
 
-__author__ = 730151647
+__author__ = "730151647"
 
 # The datetime data type is imported from the datetime library.
 # A datetime object models a specific date and time.
@@ -16,18 +16,21 @@ from datetime import datetime
 # Official Documentation: https://docs.python.org/3/library/datetime.html#datetime.timedelta
 from datetime import timedelta
 
-#python -m exercises.ex01.vaccine_calc
+#Begin program here...
 population: int = int(input("Population:"))
 doses_administered: int = int(input("Doses administered:"))
 doses_per_day: int = int(input("Doses per day:"))
+targt_percnt_int_vaccine: int = int(input("Target percent vaccinated:"))  
 
-target_percent_integer_vaccinated: float = float(input("Target percent vaccinated:"))  
-target_percent_decimal_vaccinated: float = float(target_percent_integer_vaccinated / 100)
+targt_percnt_float_vaccine: float = float(targt_percnt_int_vaccine / 100)
+peple_dosed: int = round(doses_administered / 2)
+percnt_population: int = round(targt_percnt_float_vaccine * population)
 
-day_count: float = round(float(((((target_percent_decimal_vaccinated) * population) - (doses_administered / 2)) / doses_per_day) * 2))
+days: float = round(float((((percnt_population - peple_dosed) / doses_per_day) * 2)))
 
 today: datetime = datetime.today()
-vaccination_time: timedelta = timedelta(day_count)
+vaccination_time: timedelta = timedelta(days)
 future: datetime = today + vaccination_time
 
-print("We will reach " + str(round(target_percent_integer_vaccinated)) + "% vaccination in " + str(day_count) + " days, which falls on " + str(future.strftime("%B %d, %Y") + "."))
+print("We will reach " + str(targt_percnt_int_vaccine) + "% vaccination in " + str(days) + " days...")
+print("or on " + str(future.strftime("%B %d, %Y") + "."))
