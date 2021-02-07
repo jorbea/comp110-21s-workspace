@@ -31,7 +31,7 @@ today: datetime = datetime.today()
 vaccination_time: timedelta = timedelta(days)
 future: datetime = today + vaccination_time
 
-if ((targt_percnt_int_vaccine <= 0) or (targt_percnt_int_vaccine >= 100)):
+if ((targt_percnt_int_vaccine < 0) or (targt_percnt_int_vaccine > 100)):
     print("Please enter a target percent vaccinated value of 0 to 100.")
 else:
     print("We will reach " + str(targt_percnt_int_vaccine) + "% vaccination in " + str(days) + " days.")
