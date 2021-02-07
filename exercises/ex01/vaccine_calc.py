@@ -19,7 +19,7 @@ from datetime import timedelta
 population: int = int(input("Population:"))
 doses_administered: int = int(input("Doses administered:"))
 doses_per_day: int = int(input("Doses per day:"))
-targt_percnt_int_vaccine: int = int(input("Target percent vaccinated:"))  
+targt_percnt_int_vaccine: int = int(input("Target percent vaccinated:"))
 
 targt_percnt_float_vaccine: float = float(targt_percnt_int_vaccine / 100)
 peple_dosed: int = round(doses_administered / 2)
@@ -31,5 +31,8 @@ today: datetime = datetime.today()
 vaccination_time: timedelta = timedelta(days)
 future: datetime = today + vaccination_time
 
-print("We will reach " + str(targt_percnt_int_vaccine) + "% vaccination in " + str(days) + " days.")
-print(("This target will fall on " + str(future.strftime("%B %d, %Y")) + "."))
+if ((targt_percnt_int_vaccine <= 0) or (targt_percnt_int_vaccine >= 100)):
+    print("Please enter a target percent vaccinated value of 0 to 100.")
+else:
+    print("We will reach " + str(targt_percnt_int_vaccine) + "% vaccination in " + str(days) + " days.")
+    print(("This target will fall on " + str(future.strftime("%B %d, %Y")) + "."))
