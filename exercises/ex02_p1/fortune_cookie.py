@@ -13,6 +13,7 @@ def main() -> None:
 
 
 def fortune_cookie() -> str:
+    """Takes a random number between 1 & 4, assigns it to x, and returns a fortune based on the relation to x."""
     x: int = randint(1, 4)
     if (x < 4):
         if (x < 3):
