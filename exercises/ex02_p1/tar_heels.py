@@ -12,10 +12,11 @@ def main() -> None:
     print(tar_heels(choice))
 
 
-def tar_heels(response: int) -> str:
-    if ((response % 2 == 0) or (response % 7 == 0)):
-        if (response % 2 == 0):
-            if (response % 7 == 0):
+def tar_heels(choice: int) -> str:
+    """Integer from user is evaluated and a string is returned."""
+    if ((choice % 2 == 0) or (choice % 7 == 0)):
+        if (choice % 2 == 0):
+            if (choice % 7 == 0):
                 return("TAR HEELS")
             else:
                 return("TAR")
