@@ -1,8 +1,15 @@
 """Choose your own adventure!"""
+from random import randint
+
+"""Went above and beyond per specification #10: Battle simulation with health updates 
+and emoji in the nasal function call."""
+"""Went above and beyond per specification #9: In the main function the player can choose 
+to replay their first mission, continue, or end the game. If the player replays their
+first mission then they will have the opportunity to continue or end the game after
+that round."""
 
 __author__ = "730151647"
 
-from random import randint
 player: str = ""
 points: int = 0
 emoji_constant = "\U0001F974"
@@ -15,7 +22,7 @@ def main() -> None:
     print("Thymus: In order to stop the COVID invasion you must go to the source... The lungs!")
     print("Thymus: I'm also recieving word that our host didn't follow the BCCDC guidelines last night...")
     print("Thymus: We have detected an unknown invader proliferating in the nasal passage.")
-    print("Thymus: It's your choice where to go first, but go ASAP before we we're completely overrun...")
+    print("Thymus: It's your choice where to go first, but go ASAP before we're completely overrun...")
     print("Thymus: Show those virions the meaning of apoptosis!")
     print("Would you like to (1) - continue to the nasal passage, (2) - continue to the lungs, (3) - quit?")
     path_1: str = input("1, 2, or 3: ")
@@ -33,9 +40,24 @@ def main() -> None:
     print(f"Adventure points: {str(points)}")
 
     print("Thymus: Great work! Our host is starting to feel better. Let's finish this!")
-    path_2 = ["1", "2", "3"]
-    path_2.remove(path_1)
-    print(f"Would you like to ({path_2[0]}) - continue or (3) - quit?")
+    print("Would you like to (1) - continue to the nasal passage, (2) - continue to the lungs, (3) - quit?")
+    path_2: str = input("1, 2, or 3: ")
+    if path_2 == "1" or path_2 == "2":
+        if path_2 == "1":
+            points += 50
+            points += nasal(points)
+        else:
+            points += 200
+            points += lungs(points)
+    else:
+        print(f"Adventure points: {str(points)}")
+        print("Goodbye!")
+        return None
+    print(f"Adventure points: {str(points)}")
+
+    path_3 = ["1", "2", "3"]
+    path_3.remove(path_1)
+    print(f"Would you like to ({path_3[0]}) - continue or (3) - quit?")
     choice: str = input()
     if choice == "1" or choice == "2":
         if choice == "1":
@@ -48,7 +70,8 @@ def main() -> None:
         print(f"Adventure points: {str(points)}")
         print("Goodbye!")
         return None
-    print("You have defeated the Flu and COVID-19. " + "\U0001F389" + " I knew you were right for the job!")
+    print("Thymus: You defeated the Flu and COVID!")
+    print("\U0001F389")
     print(f"Adventure points: {str(points)}")
     print("The End!")
 
@@ -69,15 +92,14 @@ def greet() -> None:
 
 def nasal(nasal_points: int) -> int:
     """Takes the user through the mission of defeating the unknown invader."""
-    global points
-    points = 50
+    points = 0
     global emoji_constant
     print("You waste little time traveling to the site of the unknown invader!")
     print("Thymus: Not this guy again!")
     print("You come across a mass of spike proteins bound to sialic acid...")
     print("Thymus: Looks like our ole frenemie is trying to take advantage of all the chaos.")
     print("When will the Flu ever learn?") 
-    print("Flu: " + str(player) + "\U0001F628! Not you again!")
+    print(f"Flu: {str(player)} \U0001F628! Not you again!")
     flu_health: int = 100
     print(f"Flu Heath: {flu_health}")
     print("Attack! (1) - Perforin or (2) - Cytotoxin")
@@ -85,13 +107,14 @@ def nasal(nasal_points: int) -> int:
         if input("1 or 2: ") == "1":
             flu_health -= 25
             print(emoji_constant)
-            print(flu_health)
+            print(f"Flu Heath: {flu_health}")
         else:
             flu_health -= 50
             print(emoji_constant)
-            print(flu_health)
+            print(f"Flu Heath: {flu_health}")
     print("\U0001F635")
-    return 250
+    points += 250
+    return points
 
 
 def lungs(lungs_points: int) -> int:
@@ -99,7 +122,7 @@ def lungs(lungs_points: int) -> int:
     global points
     print("After a quick ride through the bloodstream you find yourself in the belly of the beast.")
     print("Thymus: Heads up! I'm detecting multiple COVID virions coming your way.")
-    print("Thymus: If you destroy the queeen then all of the other COVID particles with die with it.")
+    print("Thymus: If you destroy the queeen then all of the other COVID particles will die with it.")
     print("Thymus: However, I can't identify which is the queen.")
     print("It's up to you to find the queen and end all of this!")
     print("COVID: Say goodbye to your most elite T-cell Thymus!")
