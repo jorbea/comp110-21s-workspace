@@ -3,6 +3,7 @@
 __author__ = "730151647"
 
 from csv import DictReader
+from os import confstr_names
 
 
 def read_csv_rows(csv_file: str) -> list[dict[str, str]]:
@@ -14,7 +15,6 @@ def read_csv_rows(csv_file: str) -> list[dict[str, str]]:
 
     for row_by_row in csv_reader:
         rows.append(row_by_row)
-    
     file_handle.close()
     return rows
 
@@ -29,9 +29,13 @@ def column_values(rows: list[dict[str, str]], row_name: str) -> list[str]:
 
 
 def columnar(list_of_rows: list[dict[str, str]]) -> dict[str, list[str]]:
+    """Transforms a list of rows into a dictionary of columns."""
     table: dict[str, list[str]] = {}
     
-    for column in list_of_rows:
-        for names in column:
-            table[names] = 1
+    first_row = list_of_rows[0]
+
+    for column_name in first_row:
+        table[column_name] = column_values(list_of_rows, column_name)
     return table
+
+
