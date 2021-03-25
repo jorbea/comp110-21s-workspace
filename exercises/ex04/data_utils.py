@@ -4,6 +4,7 @@ __author__ = "730151647"
 
 from csv import DictReader
 from os import confstr_names
+from typing import KeysView
 
 
 def read_csv_rows(csv_file: str) -> list[dict[str, str]]:
@@ -39,3 +40,18 @@ def columnar(list_of_rows: list[dict[str, str]]) -> dict[str, list[str]]:
     return table
 
 
+def head(column_table: dict[str, list[str]], number_of_rows: int) -> dict[str, list[str]]:
+    return_table: dict[str, list[str]] = {}
+    
+    first_row = column_table.keys()
+    first_value = column_table.values()
+    i: int = 0
+
+    for key in first_row:
+        n_values: list[str] = []
+        for value in first_value:
+            while i < number_of_rows:
+                n_values.append(value[i])
+                return_table[key] = n_values
+                i += 1
+    return return_table
