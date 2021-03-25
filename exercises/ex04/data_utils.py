@@ -3,9 +3,8 @@
 __author__ = "730151647"
 
 from csv import DictReader
-from os import confstr_names
-from typing import KeysView
-
+# from os import confstr_names
+# from typing import KeysView
 
 def read_csv_rows(csv_file: str) -> list[dict[str, str]]:
     """Read a CSV file's contents into a list of rows."""
@@ -41,17 +40,30 @@ def columnar(list_of_rows: list[dict[str, str]]) -> dict[str, list[str]]:
 
 
 def head(column_table: dict[str, list[str]], number_of_rows: int) -> dict[str, list[str]]:
-    return_table: dict[str, list[str]] = {}
+    """Produces a table with the first N rows of data for each column."""
+    head_table: dict[str, list[str]] = {}
     
-    first_row = column_table.keys()
-    first_value = column_table.values()
-    i: int = 0
+    for key in column_table:
+        head_table[key] = column_table[key][:number_of_rows]
+    return head_table
 
-    for key in first_row:
-        n_values: list[str] = []
-        for value in first_value:
-            while i < number_of_rows:
-                n_values.append(value[i])
-                return_table[key] = n_values
-                i += 1
-    return return_table
+
+def select(col_table: dict[str, list[str]], col_names: list[str]) -> dict[str, list[str]]:
+    """Produces a table with only a specific subset of the original columns."""
+    select_table: dict[str, list[str]] = {}
+    
+    for name in col_names:
+        select_table[name] = col_table[name]
+    return select_table
+
+
+def count(list_values: list[str]) -> dict[str, int]:
+    """Produces a dictionary of values within a column and their frequencies expressed as an integer."""
+    count_table: dict[str, int] = {}
+
+    for value in list_values:
+        if value in count_table:
+            count_table[value] += 1
+        else:
+            count_table[value] = 1
+    return count_table
