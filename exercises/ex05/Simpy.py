@@ -83,7 +83,63 @@ class Simpy:
             for i in range(len(self.values)):
                 pow_list.append(self.values[i] ** rhs.values[i])
         return Simpy(pow_list)
-        
+
+    def __mod__(self, rhs: Union[float, Simpy]) -> Simpy:
+        """Finds the remainder of each index of self with respect to a float value or Simpy object."""
+        mod_list: list[float] = []
+        if isinstance(rhs, float):
+            for item in self.values:
+                mod_list.append(item % rhs)
+        else:
+            # isinstance(rhs, Simpy)
+            assert len(self.values) == len(rhs.values)
+            for i in range(len(self.values)):
+                mod_list.append(self.values[i] % rhs.values[i])
+        return Simpy(mod_list)
+
+    def __eq__(self, rhs: Union[float, Simpy]) -> list[bool]:
+        """Generates a mask based on the equality of each index of self..."""
+        """...and a float value, or Simpy object."""
+        mask: list[bool] = []
+        if isinstance(rhs, float):
+            for item in self.values:
+                if item == rhs:
+                    mask.append(True)
+                else:
+                    mask.append(False)
+        else:
+            # isinstance(rhs, Simpy)
+            assert len(self.values) == len(rhs.values)
+            for i in range(len(self.values)):
+                if self.values[i] == rhs.values[i]:
+                    mask.append(True)
+                else:
+                    mask.append(False)
+        return mask
+
+    def __gt__(self, rhs: Union[float, Simpy]) -> list[bool]:
+        """Generates a mask based on the greater than relationship between each index of self..."""
+        """...and a float value, or Simpy object."""
+        greater_mask: list[bool] = []
+        if isinstance(rhs, float):
+            for item in self.values:
+                if item > rhs:
+                    greater_mask.append(True)
+                else:
+                    greater_mask.append(False)
+        else:
+            # isinstance(rhs, Simpy)
+            assert len(self.values) == len(rhs.values)
+            for i in range(len(self.values)):
+                if self.values[i] > rhs.values[i]:
+                    greater_mask.append(True)
+                else:
+                    greater_mask.append(False)
+        return greater_mask
+    
+    def __getitem__(self, rhs: int) -> float:
+        """Gives the ability to use the subscription notation operator with Simpy objects."""
+        return self.values[rhs]
 
     
         
