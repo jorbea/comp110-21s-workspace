@@ -8,7 +8,7 @@ __author__ = "730151647"
 
 
 class Simpy:
-    """Class with a single attribute of a list of floats."""
+    """Utility class for common float column operations."""
     values: list[float]
 
     def __init__(self, list_values: list[float]) -> None:
@@ -31,10 +31,8 @@ class Simpy:
     def arange(self, start: float, stop: float, step: float = 1.0) -> None:
         """Fills an object's 'values' attribute with a range of values."""
         assert step != 0.0
-        
         arange_list: list[float] = []
         i: float = start
-
         if step > 0.0:
             if i < stop:
                 while i < stop:
@@ -45,7 +43,6 @@ class Simpy:
                     arange_list.append(i)
                     i -= step
             self.values = arange_list
-        
         elif step < 0.0:
             if i < stop:
                 while i < stop:
@@ -56,7 +53,38 @@ class Simpy:
                     arange_list.append(i)
                     i += step
             self.values = arange_list
-
         
+    def sum(self) -> float:
+        """Compute and return the sum of all items in the values attributes."""
+        return sum(self.values)
+    
+    def __add__(self, rhs: Union[float, Simpy]) -> Simpy:
+        """Combines each index of self with a float value or the respective index of rhs."""
+        add_list: list[float] = []
+        if isinstance(rhs, float):
+            for item in self.values:
+                add_list.append(item + rhs)
+        else:
+            # isinstance(rhs, Simpy)
+            assert len(self.values) == len(rhs.values)
+            for i in range(len(self.values)):
+                add_list.append(self.values[i] + rhs.values[i])
+        return Simpy(add_list)
+
+    def __pow__(self, rhs: Union[float, Simpy]) -> Simpy:
+        """Exponentiates each index of self with a float value or the respective index of rhs."""
+        pow_list: list[float] = []
+        if isinstance(rhs, float):
+            for item in self.values:
+                pow_list.append(item ** rhs)
+        else:
+            # isinstance(rhs, Simpy)
+            assert len(self.values) == len(rhs.values)
+            for i in range(len(self.values)):
+                pow_list.append(self.values[i] ** rhs.values[i])
+        return Simpy(pow_list)
+        
+
+    
         
         
