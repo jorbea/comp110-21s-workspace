@@ -137,10 +137,19 @@ class Simpy:
                     greater_mask.append(False)
         return greater_mask
     
-    def __getitem__(self, rhs: int) -> float:
-        """Gives the ability to use the subscription notation operator with Simpy objects."""
-        return self.values[rhs]
-
-    
+    def __getitem__(self, rhs: Union[int, list[bool]]) -> Union[float, Simpy]:
+        """Gives the ability to use the subscription notation operator with Simpy objects..."""
+        """...and to filter masks."""
+        filter_list: list[float] = []
+        if isinstance(rhs, int):
+            return self.values[rhs]
+        else:
+            # if isintance(rhs, list[bool])
+            for i in range(len(rhs)):
+                if rhs[i]:
+                    # if rhs[i] is True
+                    filter_list.append(self.values[i])
+            return Simpy(filter_list)
+                    
         
         
